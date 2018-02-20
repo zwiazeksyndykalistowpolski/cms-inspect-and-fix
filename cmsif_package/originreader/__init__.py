@@ -18,11 +18,11 @@ class OriginReader(Interface):
     def __create_proper_reader(self):
         """ Creates a reader that reads from zip/tar/directory """
 
-        if self.originPath[:-4] == ".zip":
+        if self.originPath[-4:] == ".zip":
             self.reader = ZipReader(self.originPath)
             return
 
-        elif self.originPath[:-7] == ".tar.gz" or self.originPath[:-8] == ".tar.bz2":
+        elif self.originPath[-7:] == ".tar.gz" or self.originPath[:-8] == ".tar.bz2":
             self.reader = TarReader(self.originPath)
             return
 
