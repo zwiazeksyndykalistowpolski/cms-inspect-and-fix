@@ -11,13 +11,15 @@ from .originreader import OriginReader
 
 class Application:
     pathToOrigin = ""         # type: str
+    chdir = ""                # type: str
     pathToApplication = ""    # type: str
     originReader = None       # type: OriginReader
     logger = None             # type: logging.Logger
 
-    def __init__(self, origin_path, app_path):
+    def __init__(self, origin_path: str, app_path: str, chdir: str):
         self.pathToOrigin = origin_path
         self.pathToApplication = app_path
+        self.chdir = chdir
 
         self.setup_logger()
 
@@ -45,7 +47,10 @@ class Application:
     def setup_origin_reader(self):
         """ Creates an instance of a origin reader """
 
-        self.originReader = OriginReader(origin_path=self.pathToOrigin)
+        self.originReader = OriginReader(
+            origin_path=self.pathToOrigin,
+            chdir=self.chdir
+        )
 
     def main(self):
         self.validate()

@@ -6,14 +6,15 @@ from .interface import Interface
 class ZipReader(Interface):
     path = ""
     reader = None    # type: ZipFile
+    chdir = ''
 
-    def __init__(self, origin_path):
+    def __init__(self, origin_path: str, chdir = ''):
         self.path = origin_path
         self.reader = ZipFile(self.path, 'r')
+        self.chdir = chdir
 
-    def fetch_file_contents(self, path):
-        try:
-            return self.reader.read('wordpress/wp-settidngs.php')
+    def file_exists(self, path: str):
+        return any(x.startswith("%s" % self.chdir + path.rstrip("/")) for x in self.reader.namelist())
 
-        except KeyError:
-            return ""
+    def fetch_file_contents(self, path: str):
+        return self.reader.read(self.chdir + path).decode('utf-8')

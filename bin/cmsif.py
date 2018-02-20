@@ -16,15 +16,19 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--origin', help='An origin tarball/zipball path', default='')
     parser.add_argument('--application', help='Application path, defaults to current directory', default='./')
+    parser.add_argument('--chdir', help='Path prefix, useful when eg. files are inside a directory in a tar.gz/zip' +
+                                        ' file example value: "wordpress/"', default='')
     parsed = parser.parse_args()
 
     app = Application(
         origin_path=parsed.origin,
-        app_path=parsed.application
+        app_path=parsed.application,
+        chdir=parsed.chdir
     )
 
     try:
         app.main()
+
     except InvalidArgumentException as e:
         print(e)
         sys.exit(1)
