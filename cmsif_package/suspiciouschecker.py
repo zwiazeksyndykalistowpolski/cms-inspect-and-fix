@@ -10,6 +10,8 @@ class SuspiciousChecker:
         ";$GLOBALS['",
         "){eval($",
         'eval(base64_decode',
+        re.compile('eval\(\$.*\$(GLOBALS|_GET|_POST|_REQUEST).*\)'),
+
 
         # js specific
         "CreateObject('WScript.Shell')",
