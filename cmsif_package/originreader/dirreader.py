@@ -16,7 +16,7 @@ class DirectoryReader(Interface):
 
     def fetch_file_contents(self, path):
         if not self.file_exists(path):
-            raise FileNotFoundError('Cannot find file "' + path + '"')
+            raise Exception('Cannot find file "' + path + '"')
 
         try:
             handle = open(self.directory + '/' + self.chdir + path, 'r')
