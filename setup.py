@@ -21,6 +21,5 @@ setup(
         'Environment :: Web Environment',
         'Topic :: Security'
     ],
-    install_requires=['unittest-data-provider'],
     scripts=['bin/cmsif.py']
 )
