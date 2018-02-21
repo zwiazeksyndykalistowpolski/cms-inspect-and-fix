@@ -17,4 +17,8 @@ class ZipReader(Interface):
         return any(x.startswith("%s" % self.chdir + path.rstrip("/")) for x in self.reader.namelist())
 
     def fetch_file_contents(self, path: str):
-        return self.reader.read(self.chdir + path).decode('utf-8')
+        try:
+            return self.reader.read(self.chdir + path).decode('utf-8')
+        except UnicodeDecodeError:
+            # in case of binary files do not attempt to load them
+            return ''

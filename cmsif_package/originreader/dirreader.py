@@ -18,8 +18,11 @@ class DirectoryReader(Interface):
         if not self.file_exists(path):
             raise FileNotFoundError('Cannot find file "' + path + '"')
 
-        handle = open(self.directory + '/' + self.chdir + path, 'r')
-        content = handle.read()
-        handle.close()
+        try:
+            handle = open(self.directory + '/' + self.chdir + path, 'r')
+            content = handle.read()
+            handle.close()
+        except UnicodeDecodeError:
+            content = ""
 
         return content
