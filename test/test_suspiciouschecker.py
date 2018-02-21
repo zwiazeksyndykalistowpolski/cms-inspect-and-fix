@@ -8,7 +8,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from cmsif_package.suspiciouschecker import SuspiciousChecker
 
 
-
 class TestSuspiciousChecker(unittest.TestCase):
 
     bad_probes = lambda: (
